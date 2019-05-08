@@ -45,9 +45,9 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 		}
 		else {
 			var temp = element.path[0].parentNode;
-			console.log('el')
+			console.log('el', element)
 			var temp1 = preElement.parentNode;
-			element[0].parentNode = null;
+			// element[0].parentNode = null;
 			temp1.appendChild(element);
 			preElement.parentNode = null;
 			temp.appendChild(preElement);
@@ -67,6 +67,8 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 				if (asset.hasOwnProperty(key)) {
 					const img: HTMLImageElement = document.createElement('img');
 					const div: HTMLDivElement = document.createElement("div");
+					const deleteBtn: HTMLDivElement = document.createElement('div');
+					deleteBtn.innerHTML = 'Delete';
 					div.style.position = 'relative';
 					div.className = 'image-holder';
 					img.src = `https://res.cloudinary.com/${installationParameters.cloudName}/image/${asset[key].type}/h_100,w_100,c_fill/${asset[key].public_id}`;
@@ -74,7 +76,9 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 					img.width = 100;
 					img.style.margin = "0 10px 20px 0";
 					img.addEventListener('click', selector);
+					img.addEventListener('click', deleteImage);
 					div.appendChild(img);
+					div.appendChild(deleteBtn);
 					container.appendChild(div);
 				}
 			}
@@ -84,6 +88,10 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 		previewPane.style.display = asset ? 'flex' : 'none';
 		deleteButton.style.display = asset ? 'inline' : 'none';
 		createButton.style.display = asset ? 'none' : 'inline';
+	}
+
+	async function deleteImage() {
+		console.log('extension', extension.field.getValue());
 	}
 
 	async function clearField() {
