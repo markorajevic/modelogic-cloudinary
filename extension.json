@@ -1,7 +1,7 @@
 {
 	"id": "cf-cloudinary",
 	"name": "Cloudinary Library Picker",
-	"src": "https://seibert-io.github.io/contentful-cloudinary-extension/dist/",
+	"src": "https://markorajevic.github.io/modelogic-cloudinary/dist/index.html",
 	"fieldTypes": [
 		"Object"
 	],
