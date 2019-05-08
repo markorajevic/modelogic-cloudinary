@@ -57,6 +57,7 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 	// }
 	function updateFieldContent(): void {
 		const asset: any | null = extension.field.getValue();
+		console.log('asset', asset);
 		const container = document.querySelector('#asset') as HTMLElement;
 		container.innerHTML = '';
 		container.style.overflow = 'auto';
