@@ -34,27 +34,27 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 	const createButton = document.querySelector('#create-btn') as HTMLElement;
 	const editButton = document.querySelector('#edit-btn') as HTMLElement;
 	const deleteButton = document.querySelector('#delete-btn') as HTMLElement;
-	var change = false;
-	var preElement: any = null;
-	function selector(element: any) {
-		console.log('this');
-		if (!change) {
-			console.log('el', element);
-			change = true;
-			preElement = element.path[0];
-		}
-		else {
-			var temp = element.path[0].parentNode;
-			console.log('el', element)
-			var temp1 = preElement.parentNode;
-			// element[0].parentNode = null;
-			temp1.appendChild(element);
-			preElement.parentNode = null;
-			temp.appendChild(preElement);
-			change = false;
-			preElement = null;
-		}
-	}
+	// var change = false;
+	// var preElement: any = null;
+	// function selector(element: any) {
+	// 	console.log('this');
+	// 	if (!change) {
+	// 		console.log('el', element);
+	// 		change = true;
+	// 		preElement = element.path[0];
+	// 	}
+	// 	else {
+	// 		var temp = element.path[0].parentNode;
+	// 		console.log('el', element)
+	// 		var temp1 = preElement.parentNode;
+	// 		// element[0].parentNode = null;
+	// 		temp1.appendChild(element);
+	// 		preElement.parentNode = null;
+	// 		temp.appendChild(preElement);
+	// 		change = false;
+	// 		preElement = null;
+	// 	}
+	// }
 	function updateFieldContent(): void {
 		const asset: any | null = extension.field.getValue();
 		const container = document.querySelector('#asset') as HTMLElement;
@@ -75,7 +75,7 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 					img.height = 100;
 					img.width = 100;
 					img.style.margin = "0 10px 20px 0";
-					img.addEventListener('click', selector);
+					// img.addEventListener('click', selector);
 					img.addEventListener('click', function () {
 						let values = extension.field.getValue();
 						values = values.filter(function (e: any) { return e.public_id !== asset[key].public_id });
