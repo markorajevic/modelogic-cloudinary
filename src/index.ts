@@ -34,7 +34,24 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 	const createButton = document.querySelector('#create-btn') as HTMLElement;
 	const editButton = document.querySelector('#edit-btn') as HTMLElement;
 	const deleteButton = document.querySelector('#delete-btn') as HTMLElement;
-
+	var change = false;
+	var preElement: any = null;
+	function selector(element: any) {
+		if (!change) {
+			change = true;
+			preElement = element;
+		}
+		else {
+			var temp = element.parentNode;
+			var temp1 = preElement.parentNode;
+			element.parentNode = null;
+			temp1.appendChild(element);
+			preElement.parentNode = null;
+			temp.appendChild(preElement);
+			change = false;
+			preElement = null;
+		}
+	}
 	function updateFieldContent(): void {
 		const asset: any | null = extension.field.getValue();
 		const container = document.querySelector('#asset') as HTMLElement;
@@ -48,11 +65,12 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 					const img: HTMLImageElement = document.createElement('img');
 					const div: HTMLDivElement = document.createElement("div");
 					div.style.position = 'relative';
+					div.className = 'image-holder';
 					img.src = `https://res.cloudinary.com/${installationParameters.cloudName}/image/${asset[key].type}/h_100,w_100,c_fill/${asset[key].public_id}`;
 					img.height = 100;
 					img.width = 100;
 					img.style.margin = "0 10px 20px 0";
-					img.addEventListener('click', openModal);
+					img.addEventListener('click', selector);
 					div.appendChild(img);
 					container.appendChild(div);
 				}
