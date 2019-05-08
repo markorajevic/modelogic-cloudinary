@@ -76,7 +76,11 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 					img.width = 100;
 					img.style.margin = "0 10px 20px 0";
 					img.addEventListener('click', selector);
-					img.addEventListener('click', deleteImage);
+					deleteBtn.addEventListener('click', function () {
+						let values = extension.field.getValue();
+						values = values.filter(function (e: any) { return e.public_id !== asset[key].public_id })
+						console.log('values', values);
+					})
 					div.appendChild(img);
 					div.appendChild(deleteBtn);
 					container.appendChild(div);
@@ -90,9 +94,9 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 		createButton.style.display = asset ? 'none' : 'inline';
 	}
 
-	async function deleteImage() {
-		console.log('extension', extension.field.getValue());
-	}
+	// async function deleteImage() {
+	// 	console.log('extension', extension.field.getValue());
+	// }
 
 	async function clearField() {
 		const confirmed = await extension.dialogs.openConfirm({
