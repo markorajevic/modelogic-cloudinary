@@ -1,0 +1,33 @@
+{
+	"id": "cf-cloudinary",
+	"name": "Cloudinary Library Picker",
+	"src": "https://seibert-io.github.io/contentful-cloudinary-extension/dist/",
+	"fieldTypes": [
+		"Object"
+	],
+	"parameters": {
+		"installation": [
+			{
+				"id": "cloudName",
+				"name": "Cloudinary Cloud Name",
+				"description": "Set the Cloudinary cloud name for this extension",
+				"type": "Symbol",
+				"required": true
+			},
+			{
+				"id": "apiKey",
+				"name": "Cloudinary API Key",
+				"description": "Set the Cloudinary API key for this extension",
+				"type": "Symbol",
+				"required": true
+			},
+			{
+				"id": "extensionId",
+				"name": "Contentful Extension ID",
+				"description": "Set the ID of this Contentful extension (see URL of this page)",
+				"type": "Symbol",
+				"required": true
+			}
+		]
+	}
+}
