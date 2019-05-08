@@ -41,7 +41,7 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 		if (!change) {
 			console.log('el', element);
 			change = true;
-			preElement = element;
+			preElement = element.path[0];
 		}
 		else {
 			var temp = element.parentNode;
