@@ -36,16 +36,21 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 	const deleteButton = document.querySelector('#delete-btn') as HTMLElement;
 
 	function updateFieldContent(): void {
-		const asset: Asset | null = extension.field.getValue();
+		const asset: any | null = extension.field.getValue();
 		const container = document.querySelector('#asset') as HTMLElement;
 		container.innerHTML = '';
 
 		if (asset) {
-			const img: HTMLImageElement = document.createElement('img');
-			img.src = `https://res.cloudinary.com/${installationParameters.cloudName}/image/${asset.type}/h_250/${asset.public_id}`;
-			img.height = 250;
-			img.addEventListener('click', openModal);
-			container.appendChild(img);
+			for (var key in asset) {
+				if (asset.hasOwnProperty(key)) {
+					const img: HTMLImageElement = document.createElement('img');
+					console.log('asset', asset, asset[key]);
+					img.src = `https://res.cloudinary.com/${installationParameters.cloudName}/image/${asset[key].type}/h_250/${asset[key].public_id}`;
+					img.height = 250;
+					img.addEventListener('click', openModal);
+					container.appendChild(img);
+				}
+			}
 			extension.window.updateHeight();
 		}
 
