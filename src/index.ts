@@ -40,6 +40,7 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 		const container = document.querySelector('#asset') as HTMLElement;
 		container.innerHTML = '';
 		container.style.overflow = 'auto';
+		container.style.display = 'flex';
 		if (asset) {
 			for (var key in asset) {
 				if (asset.hasOwnProperty(key)) {
