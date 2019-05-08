@@ -37,7 +37,9 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 	var change = false;
 	var preElement: any = null;
 	function selector(element: any) {
+		console.log('this');
 		if (!change) {
+			console.log('el', element);
 			change = true;
 			preElement = element;
 		}
