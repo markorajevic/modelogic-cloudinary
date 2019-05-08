@@ -76,7 +76,7 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 					img.width = 100;
 					img.style.margin = "0 10px 20px 0";
 					img.addEventListener('click', selector);
-					deleteBtn.addEventListener('click', function () {
+					img.addEventListener('click', function () {
 						let values = extension.field.getValue();
 						values = values.filter(function (e: any) { return e.public_id !== asset[key].public_id })
 						console.log('values', values);
