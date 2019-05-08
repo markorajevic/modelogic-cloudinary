@@ -152,7 +152,7 @@ function initDialogExtension(extension: DialogExtensionSDK) {
 	extension.window.startAutoResizer();
 
 	const invocationParameters: ModalInvocationParameters = extension.parameters.invocation as ModalInvocationParameters;
-
+	console.log('invocationParameters', invocationParameters);
 	const asset = invocationParameters.fieldValue ? {
 		resource_id: `${invocationParameters.fieldValue.resource_type}/${invocationParameters.fieldValue.type}/${invocationParameters.fieldValue.public_id}`,
 	} : null;
