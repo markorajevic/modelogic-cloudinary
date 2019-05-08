@@ -68,7 +68,7 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 					const img: HTMLImageElement = document.createElement('img');
 					const div: HTMLDivElement = document.createElement("div");
 					const deleteBtn: HTMLDivElement = document.createElement('div');
-					deleteBtn.innerHTML = 'Delete';
+					deleteBtn.innerText = 'Delete';
 					div.style.position = 'relative';
 					div.className = 'image-holder';
 					img.src = `https://res.cloudinary.com/${installationParameters.cloudName}/image/${asset[key].type}/h_100,w_100,c_fill/${asset[key].public_id}`;
