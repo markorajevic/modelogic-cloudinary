@@ -58,7 +58,7 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 	function updateFieldContent(): void {
 		const asset: any | null = extension.field.getValue();
 		console.log('asset', asset);
-		if (asset && asset.length == 0) {
+		if (asset.length == 0) {
 			extension.field.setValue(null);
 		}
 		const container = document.querySelector('#asset') as HTMLElement;
