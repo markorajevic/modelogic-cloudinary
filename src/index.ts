@@ -46,13 +46,15 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 			for (var key in asset) {
 				if (asset.hasOwnProperty(key)) {
 					const img: HTMLImageElement = document.createElement('img');
-					console.log('asset', asset, asset[key]);
+					const div: HTMLDivElement = document.createElement("div");
+					div.style.position = 'relative';
 					img.src = `https://res.cloudinary.com/${installationParameters.cloudName}/image/${asset[key].type}/h_100,w_100,c_fill/${asset[key].public_id}`;
 					img.height = 100;
 					img.width = 100;
 					img.style.margin = "0 10px 20px 0";
 					img.addEventListener('click', openModal);
-					container.appendChild(img);
+					div.appendChild(img);
+					container.appendChild(div);
 				}
 			}
 			extension.window.updateHeight();
