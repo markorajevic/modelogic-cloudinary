@@ -44,9 +44,10 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 			preElement = element.path[0];
 		}
 		else {
-			var temp = element.parentNode;
+			var temp = element.path[0].parentNode;
+			console.log('el')
 			var temp1 = preElement.parentNode;
-			element.parentNode = null;
+			element[0].parentNode = null;
 			temp1.appendChild(element);
 			preElement.parentNode = null;
 			temp.appendChild(preElement);
