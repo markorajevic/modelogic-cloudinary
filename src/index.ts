@@ -4,12 +4,6 @@ import { init, FieldExtensionSDK, DialogExtensionSDK } from 'contentful-ui-exten
 declare const cloudinary: any;
 
 
-interface Asset {
-	resource_type: string;
-	type: string;
-	public_id: string;
-}
-
 
 interface InstallationParameters {
 	cloudName: string;
@@ -18,9 +12,9 @@ interface InstallationParameters {
 }
 
 
-interface ModalInvocationParameters {
-	fieldValue: Asset | null;
-}
+// interface ModalInvocationParameters {
+// 	fieldValue: any | null;
+// }
 
 
 function initFieldExtension(extension: FieldExtensionSDK) {
@@ -57,9 +51,10 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 	// }
 	function updateFieldContent(): void {
 		const asset: any | null = extension.field.getValue();
-		console.log('asset', asset);
-		if (asset.length == 0) {
+		// console.log('asset', asset);
+		if (asset && asset.length == 0) {
 			extension.field.setValue(null);
+			return;
 		}
 		const container = document.querySelector('#asset') as HTMLElement;
 		container.innerHTML = '';
@@ -79,12 +74,16 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 					img.height = 100;
 					img.width = 100;
 					img.style.margin = "0 10px 20px 0";
+					img.className = key;
 					// img.addEventListener('click', selector);
-					img.addEventListener('click', function () {
+					img.addEventListener('click', function (el: any) {
 						let values = extension.field.getValue();
-						values = values.filter(function (e: any) { return e.public_id != asset[key].public_id });
+						values.splice(parseInt(el.srcElement.className), 1);
+						console.log('values', values);
+						// extension.field.setValue(null);
 						extension.field.setValue(values);
-						// updateFieldContent();
+						// console.log('val', extension.field.getValue());
+						updateFieldContent();
 					})
 					div.appendChild(img);
 					div.appendChild(deleteBtn);
@@ -150,12 +149,15 @@ function initDialogExtension(extension: DialogExtensionSDK) {
 	(document.querySelector('#dialog') as HTMLElement)!.style.height = '700px';
 
 	extension.window.startAutoResizer();
+	let asset = null;
+	// const invocationParameters: ModalInvocationParameters = extension.parameters.invocation as ModalInvocationParameters;
+	// console.log('invocationParameters', invocationParameters);
+	// if (invocationParameters.fieldValue[0]) {
+	// 	asset = invocationParameters.fieldValue[0] ? {
+	// 		resource_id: `${invocationParameters.fieldValue[0].resource_type}/${invocationParameters.fieldValue[0].type}/${invocationParameters.fieldValue[0].public_id}`,
+	// 	} : null;
+	// }
 
-	const invocationParameters: ModalInvocationParameters = extension.parameters.invocation as ModalInvocationParameters;
-	console.log('invocationParameters', invocationParameters);
-	const asset = invocationParameters.fieldValue ? {
-		resource_id: `${invocationParameters.fieldValue.resource_type}/${invocationParameters.fieldValue.type}/${invocationParameters.fieldValue.public_id}`,
-	} : null;
 
 	const options = {
 		cloud_name: String(installationParameters.cloudName),

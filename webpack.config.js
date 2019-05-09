@@ -42,27 +42,27 @@ module.exports = {
 
 	module: {
 		rules: [{
-				test: /\.tsx?$/,
-				loader: "ts-loader"
-			},
-			{
-				test: /\.m?js$/,
-				exclude: /(node_modules|bower_components)/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: ['@babel/preset-env'],
-						plugins: ['@babel/plugin-proposal-object-rest-spread']
-					}
+			test: /\.tsx?$/,
+			loader: "ts-loader"
+		},
+		{
+			test: /\.m?js$/,
+			exclude: /(node_modules|bower_components)/,
+			use: {
+				loader: 'babel-loader',
+				options: {
+					presets: ['@babel/preset-env'],
+					plugins: ['@babel/plugin-proposal-object-rest-spread']
 				}
 			}
+		}
 		]
 	},
 
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
 		compress: true,
-		port: 9000
+		port: 3000
 	},
 
 	devtool: 'source-map'

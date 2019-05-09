@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "serve": "webpack-dev-server"
+    "serve": "PORT=3000 webpack-dev-server"
   },
   "keywords": [],
   "author": "Marko",
