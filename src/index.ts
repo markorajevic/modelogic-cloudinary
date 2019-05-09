@@ -4,6 +4,13 @@ import { init, FieldExtensionSDK, DialogExtensionSDK } from 'contentful-ui-exten
 declare const cloudinary: any;
 
 
+function swap(input: any, index_A: any, index_B: any) {
+	var temp = input[index_A];
+
+	input[index_A] = input[index_B];
+	input[index_B] = temp;
+}
+
 
 interface InstallationParameters {
 	cloudName: string;
@@ -28,8 +35,8 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 	const createButton = document.querySelector('#create-btn') as HTMLElement;
 	const editButton = document.querySelector('#edit-btn') as HTMLElement;
 	const deleteButton = document.querySelector('#delete-btn') as HTMLElement;
-	// var change = false;
-	// var preElement: any = null;
+	var change = false;
+	var preElement: number = -1;
 	// function selector(element: any) {
 	// 	console.log('this');
 	// 	if (!change) {
@@ -73,16 +80,32 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 					img.src = `https://res.cloudinary.com/${installationParameters.cloudName}/image/${asset[key].type}/h_100,w_100,c_fill/${asset[key].public_id}`;
 					img.height = 100;
 					img.width = 100;
-					img.style.margin = "0 10px 20px 0";
+					img.style.margin = "20px 10px 0 0";
 					img.className = key;
-					// img.addEventListener('click', selector);
-					img.addEventListener('click', function (el: any) {
+					deleteBtn.className = key;
+					div.className = key;
+					div.addEventListener('click', function (el: any) {
+						let ind = parseInt(el.srcElement.className);
+						if (!change) {
+							change = true;
+							preElement = ind;
+						}
+						else {
+							let values = extension.field.getValue();
+							swap(values, preElement, ind);
+							change = false;
+							extension.field.setValue(values);
+							updateFieldContent();
+						}
+					})
+					deleteBtn.addEventListener('click', function (el: any) {
+						let ind = parseInt(el.srcElement.className);
 						let values = extension.field.getValue();
-						values.splice(parseInt(el.srcElement.className), 1);
-						console.log('values', values);
-						// extension.field.setValue(null);
+						values.splice(ind, 1);
 						extension.field.setValue(values);
-						// console.log('val', extension.field.getValue());
+						if (ind == 0 && values.length == 0) {
+							extension.field.setValue(null);
+						}
 						updateFieldContent();
 					})
 					div.appendChild(img);
