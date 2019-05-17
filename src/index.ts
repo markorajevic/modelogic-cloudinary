@@ -153,7 +153,7 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 			},
 		});
 		console.log('asset', asset);
-		asset = prevAssets.concat(asset);
+		asset = prevAssets ? prevAssets.concat(asset) : asset;
 		if (asset) {
 			await extension.field.setValue(asset);
 			updateFieldContent();
