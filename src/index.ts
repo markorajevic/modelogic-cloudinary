@@ -141,7 +141,9 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 	}
 
 	async function openModal(parameters: any): Promise<void> {
-		const asset = await extension.dialogs.openExtension({
+		let prevAssets: any | null = extension.field.getValue();
+		console.log('prevAssets', prevAssets);
+		let asset = await extension.dialogs.openExtension({
 			id: installationParameters.extensionId,
 			width: 2400,
 			title: 'Select Cloudinary Asset',
@@ -150,7 +152,8 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 				fieldValue: extension.field.getValue(),
 			},
 		});
-
+		console.log('asset', asset);
+		asset = prevAssets.concat(asset);
 		if (asset) {
 			await extension.field.setValue(asset);
 			updateFieldContent();
@@ -167,7 +170,6 @@ function initFieldExtension(extension: FieldExtensionSDK) {
 
 function initDialogExtension(extension: DialogExtensionSDK) {
 	const installationParameters = extension.parameters.installation as InstallationParameters;
-
 	(document.querySelector('#field') as HTMLElement).style.display = 'none';
 	(document.querySelector('#dialog') as HTMLElement)!.style.height = '700px';
 
